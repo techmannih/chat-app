@@ -10,7 +10,7 @@ const LogoutButton = () => {
 	return (
 		<div className='mt-auto'>
 			{!loading ? (
-				<div className='flex items-center justify-center gap-2 mb-4 ' >
+				<div className='flex items-center justify-center gap-2 mb-4 text-gray-300 ' >
 					Logout
 				<RiLogoutCircleRLine className='w-6 h-6 text-red-700 cursor-pointer' onClick={logout} />
 				
