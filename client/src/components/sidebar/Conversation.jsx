@@ -6,14 +6,35 @@ const Conversation = ({ conversation, lastIdx, emoji }) => {
 	const isSelected = selectedConversation?._id === conversation._id;
 	const {onlineUsers} = useSocketContext();
 	const isOnline = onlineUsers.includes(conversation._id);
+	const handleClick = () => {
+		setSelectedConversation(conversation);
+		const sidebar = document.getElementById("sidebar");
+		const msgcontainer = document.getElementById("messageContainer");
+		const isSmallScreen = window.matchMedia("(max-width: 640px)").matches;
+	
+		// For small screens (max-width: 640px)
+		if (isSmallScreen && sidebar) {
+		  sidebar.style.display = "none";
+		  msgcontainer.style.display = "block"; // Ensure the message container is displayed
+		} else {
+		  // For large screens (min-width: 641px)
+		  if (sidebar) {
+			sidebar.style.display = "";
+		  }
+		  if (msgcontainer) {
+			msgcontainer.style.display = "";
+		  }
+		}
+	  };
+
 
 	return (
 		<>
 			<div
-				className={`flex gap-2 items-center hover:bg-sky-700 rounded-2xl p-2 py-1 cursor-pointer
+				className={`flex gap-2 items-center hover:bg-sky-700 rounded-2xl p-2 py-1 cursor-pointer conversation
 				${isSelected ? "bg-sky-700" : ""}
 			`}
-				onClick={() => setSelectedConversation(conversation)}
+			onClick={handleClick}
 			>
 				<div className={`avatar ${isOnline ? "online":""}`}>
 					<div className='w-12 rounded-full'>
